@@ -1,7 +1,7 @@
 export const addTodo = async (text, createTodo) => {
   try {
     await createTodo({
-      title: text,
+      title: text.trim(),
     });
   } catch (error) {
     console.log(error);
