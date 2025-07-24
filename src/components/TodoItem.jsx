@@ -10,25 +10,25 @@ const TodoItem = ({ todo }) => {
   const [deleteTodo, { isLoading: isDeleting }] = useDeleteTodoMutation();
 
   const [isEditing, setIsEditing] = useState(false);
-  const [editText, setEditText] = useState(todo?.title || "");
+  const [newText, setNewText] = useState(todo?.title || "");
 
   useEffect(() => {
-    setEditText(todo?.title || "");
+    setNewText(todo?.title || "");
   }, [todo?.title]);
 
   if (!todo || !todo._id) return null;
 
   const handleSave = () => {
-    if (editText.trim() && editText.trim() !== todo.title) {
-      onUpdate(todo._id, editText, updateTodo);
+    if (newText.trim() && newText.trim() !== todo.title) {
+      onUpdate(todo._id, newText, updateTodo);
     }
     setIsEditing(false);
-    setEditText(todo.title);
+    setNewText(todo.title);
   };
 
   const handleCancel = () => {
     setIsEditing(false);
-    setEditText(todo.title);
+    setNewText(todo.title);
   };
 
   const handleKeyDown = (e) => {
@@ -75,8 +75,8 @@ const TodoItem = ({ todo }) => {
         {isEditing ? (
           <input
             type="text"
-            value={editText}
-            onChange={(e) => setEditText(e.target.value)}
+            value={newText}
+            onChange={(e) => setNewText(e.target.value)}
             onBlur={handleSave}
             onKeyDown={handleKeyDown}
             className="w-full px-2 py-1 text-gray-800 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"

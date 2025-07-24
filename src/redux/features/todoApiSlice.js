@@ -4,15 +4,15 @@ const todoApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     todos: builder.query({
       query: () => "todos",
-      providesTags: ["Todo"],
+      providesTags: ["Todos"],
     }),
     createTodo: builder.mutation({
       query: (data) => ({
         url: "todos",
         method: "POST",
-        body: { ...data },
+        body: data,
       }),
-      invalidatesTags: ["Todo"],
+      invalidatesTags: ["Todos"],
     }),
     updateTodo: builder.mutation({
       query: ({ id, data }) => ({
@@ -20,14 +20,14 @@ const todoApiSlice = apiSlice.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Todo"],
+      invalidatesTags: ["Todos"],
     }),
     deleteTodo: builder.mutation({
       query: (id) => ({
         url: `todos/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Todo"],
+      invalidatesTags: ["Todos"],
     }),
   }),
 });

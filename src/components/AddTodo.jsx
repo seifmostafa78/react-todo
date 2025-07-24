@@ -3,7 +3,7 @@ import { addTodo } from "../lib/todo";
 import { useCreateTodoMutation } from "../redux/features/todoApiSlice";
 
 const AddTodo = () => {
-  const [createTodo] = useCreateTodoMutation();
+  const [createTodo, { isLoading }] = useCreateTodoMutation();
   const [text, setText] = useState("");
 
   const handleSubmit = (e) => {
@@ -25,7 +25,7 @@ const AddTodo = () => {
       />
       <button
         type="submit"
-        disabled={!text.trim()}
+        disabled={!text.trim() || isLoading}
         className="px-6 py-3 bg-white text-blue-600 rounded-xl font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
       >
         Add
